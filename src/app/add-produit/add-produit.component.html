@@ -1,0 +1,45 @@
+<div class="container">
+    <div>
+        <h2>Ajouter un Produit :</h2>
+        <form  #f="ngForm">
+
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>ID Produit</label>
+                <input type="text" [(ngModel)]="newProduit.idProduit" #i="ngModel" pattern="[0-9]+$" name="idProduit"
+                    required class="form-control">
+                <div class="alert alert-danger" *ngIf="i.invalid && i.touched ">
+                    <div *ngIf="i.errors.required"> ce champ est obligatoire</div>
+                    <div *ngIf="i.errors.pattern"> id ne doit etre que des chiffres</div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Nom Produit</label>
+                <input required type="text" [(ngModel)]="newProduit.nomProduit" #n="ngModel" name="nomProduit"
+                    class="form-control">
+                <div class="alert alert-danger" *ngIf="n.invalid && n.touched ">
+                    <div *ngIf="n.errors.required"> ce champ est obligatoire</div>
+
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label>Prix Produit</label>
+                <input required type="number" [(ngModel)]="newProduit.prixProduit" #p="ngModel" name="prixProduit"
+                    class="form-control">
+                <div class="alert alert-danger" *ngIf="p.invalid && p.touched ">
+
+                    <div *ngIf="p.errors.required"> ce champ est obligatoire</div>
+
+                </div>
+                <div class="alert alert-danger" *ngIf="p.value<0">
+                    price is ++++
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label>Date création</label>
+                <input type="date" [(ngModel)]="newProduit.dateCreation" name="dateCreation" class="form-control">
+            </div>
+            <div class="mt-2">
+                <button type="submit" (click)="addProduit()"  [disabled]="f.invalid || p.value<0" class="btn btn-success">Ajouter</button>
+            </div>
+        </form>
+    </div>
